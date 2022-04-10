@@ -41,10 +41,11 @@ html(lang="ar")
             let GetPosts = !{jsStringify(GetPosts)};
             let from = 4
             let to = 7
-            let [A1] = GetPosts.slice(-1);
-            let [A2] = GetPosts.slice(-2);
-            let [A3] = GetPosts.slice(-3);
-            let [A4] = GetPosts.slice(-4);
+            let arr_type = GetPosts.filter(e => e.type === 'image');
+            let [A1] = arr_type.slice(-1);
+            let [A2] = arr_type.slice(-2);
+            let [A3] = arr_type.slice(-3);
+            let [A4] = arr_type.slice(-4);
             let Arr = [A1, A2, A3, A4]
 
             for (let item of Arr) {
@@ -62,7 +63,7 @@ html(lang="ar")
             }
 
             document.getElementById('more').addEventListener('click', (e) => {
-                let GetArray = getFromTo(GetPosts, from, to)
+                let GetArray = getFromTo(arr_type, from, to)
                 if (to < GetPosts.length) {
 
                     from += 4

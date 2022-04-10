@@ -6,7 +6,6 @@ const { Sequelize, Model, DataTypes } = require('sequelize');
 const sqlite3 = require('sqlite3');
 const jsStringify = require('js-stringify');
 const Telegram = require('./Telegram/index.js');
-const path = require('path');
 
 
 async function Express() {
@@ -138,7 +137,8 @@ async function Express() {
             console.log(findPosts);
             if (findPosts === undefined) {
 
-                response.status(500).sendFile(path.join(__dirname, '/views/404.html'));
+                let render = pug.renderFile('./views/404.pug', { localhost: localhost });
+                response.status(500).send(render);
 
             } else {
 
@@ -158,7 +158,6 @@ async function Express() {
                     lastUsers: lastUsers.username ? lastUsers.username : lastUsers.name
                 }
                 let render = pug.renderFile('./views/Quran_Surah.pug', Options);
-                //response.send(getPosts.path);
                 response.send(render)
             }
 
@@ -176,7 +175,8 @@ async function Express() {
             // .title.replace(/\s+/g, '_').slice(0,50)
             if (findPosts === undefined) {
 
-                response.status(500).sendFile(path.join(__dirname, '/views/404.html'));
+                let render = pug.renderFile('./views/404.pug', { localhost: localhost });
+                response.status(500).send(render);
 
             } else {
 
@@ -203,7 +203,8 @@ async function Express() {
         });
 
         app.get('*', (request, response) => {
-            response.sendFile(path.join(__dirname, '/views/404.html'));
+            let render = pug.renderFile('./views/404.pug', { localhost: localhost });
+            response.status(500).send(render);
         });
 
 
