@@ -1,3 +1,5 @@
 db.sqlite3
 node_modules
 package-lock.json
+public/files/video
+public/files/image

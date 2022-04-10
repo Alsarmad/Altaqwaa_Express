@@ -6,6 +6,7 @@ const { Sequelize, Model, DataTypes } = require('sequelize');
 const sqlite3 = require('sqlite3');
 const jsStringify = require('js-stringify');
 const Telegram = require('./Telegram/index.js');
+const path = require('path');
 
 
 async function Express() {
@@ -137,7 +138,7 @@ async function Express() {
             console.log(findPosts);
             if (findPosts === undefined) {
 
-                response.status(500).send('Posts not found.');
+                response.status(500).sendFile(path.join(__dirname, '/views/404.html'));
 
             } else {
 
@@ -175,7 +176,7 @@ async function Express() {
             // .title.replace(/\s+/g, '_').slice(0,50)
             if (findPosts === undefined) {
 
-                response.status(500).send('Posts not found.');
+                response.status(500).sendFile(path.join(__dirname, '/views/404.html'));
 
             } else {
 
@@ -202,8 +203,7 @@ async function Express() {
         });
 
         app.get('*', (request, response) => {
-            response.send('errrrrrror');
-            // response.sendFile(path.join(__dirname, `./${posts[0].path}`));
+            response.sendFile(path.join(__dirname, '/views/404.html'));
         });
 
 

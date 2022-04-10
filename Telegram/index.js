@@ -149,6 +149,45 @@ module.exports = async function Telegram() {
 
     });
 
+    bot.on("new_chat_members", async (ctx) => {
+
+        let members = ctx.update.message.new_chat_members[0];
+        let id = members.id;
+        let username = members.username? members.username : null;
+        let first_name = members.first_name ? members.first_name : members.last_name ? members.last_name : null;
+        let type = ctx.chat.type
+        let GetUsers = await Users.findAll();
+
+        if (GetUsers.some(e => e.dataValues.telegramid.toString().includes(id)) === false || GetUsers.length === 0) {
+
+            await Users.create({
+                type: type,
+                username: username,
+                name: first_name,
+                telegramid: id
+            })
+            
+            console.log(`join  ${id}`);
+
+        }
+
+
+    });
+
+    bot.on("left_chat_member", async (ctx) => {
+
+        let members = ctx.update.message.left_chat_member;
+        let id = members.id;
+        let GetUsers = await Users.findAll();
+
+        if (GetUsers.some(e => e.dataValues.telegramid.toString().includes(id))) {
+
+            await Users.destroy({ where: { telegramid: id }, force: true });
+            console.log(`left ${id}`);
+        }
+
+    });
+
     bot.on("message", async (ctx) => {
 
         let text = ctx.message.text
