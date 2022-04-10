@@ -55,23 +55,31 @@ module.exports = async function Telegram() {
         let username = ctx.chat.username ? ctx.chat.username : null;
         let first_name = ctx.chat.first_name ? ctx.chat.first_name : ctx.chat.last_name ? ctx.chat.last_name : ctx.chat.title ? ctx.chat.title : null;
         let type = ctx.chat.type
+        let GetUsers = await Users.findAll();
 
         if (ctx.update.my_chat_member.new_chat_member.status === 'member' || ctx.update.my_chat_member.new_chat_member.status === 'administrator') {
 
-            await Users.create({
-                type: type,
-                username: username,
-                name: first_name,
-                telegramid: id
-            })
-            console.log(`join  ${id}`);
+            if (GetUsers.some(e => e.dataValues.telegramid !== id) || GetUsers.length === 0) {
+
+                await Users.create({
+                    type: type,
+                    username: username,
+                    name: first_name,
+                    telegramid: id
+                })
+                console.log(`join  ${id}`);
+
+            }
 
         }
 
         else if (ctx.update.my_chat_member.new_chat_member.status === 'left' || ctx.update.my_chat_member.new_chat_member.status === 'kicked') {
 
-            await Users.destroy({ where: { telegramid: id }, force: true });
-            console.log(`left ${id}`);
+            if (GetUsers.some(e => e.dataValues.telegramid === id)) {
+
+                await Users.destroy({ where: { telegramid: id }, force: true });
+                console.log(`left ${id}`);
+            }
 
         }
 
