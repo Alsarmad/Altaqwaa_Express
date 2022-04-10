@@ -1,0 +1,105 @@
+doctype html
+html(lang="ar")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(name="description" content="الصور - موقع التقوى")
+        meta(name="keywords" content="صور , صور إسلامي , صور دينية , التقوى ,  تصاميم إسلامية, تصميم إسلامي, islam, photo islam , image islam, islam, islamc")
+        title الصور
+        link(rel="stylesheet" href=" /Css/style.css" type="text/css")
+        link(rel="shortcut icon" href="../logo.png" type="image/x-icon")
+    body 
+        #header_top
+            a.header_url(href=localhost) الرئيسية
+            a.header_url(href=localhost+'/video') الفيديوهات
+            a.header_url(href=localhost+'/image') الصور
+            a.header_url(href=localhost+'/quran') القرآن الكريم
+            a.header_url(href=localhost+'/app') تطبيق التقوى
+        #header
+            a(href=localhost) 
+                img(src="../logo.png" id="logo")
+            a(href="https://t.me/tqw24h" target="_blank") 
+                img(src="../telegram.png" id="telegram")
+        #posts_home
+            ul#grid
+            button#more المزيد
+        #Statistics
+            #Statistics_top إحصائيات 
+            ul#Statistics_text
+                li عدد المشاركات: 
+                    span#Statistics_psts= GetPosts.length
+                li عدد الأعضاء: 
+                    span#Statistics_psts= Users_length
+                li أحدث عضو: 
+                    span#Statistics_psts= lastUsers
+        p#bottom موقع التقوى | www.altaqwaa.org 
+        p#bottom_2 Desing web site by : 
+            a(href="https://github.com/rn0x" id="bottom_a" target="_blank") @rn0x  
+
+        script(type="text/javascript").
+            let GetPosts = !{jsStringify(GetPosts)};
+            let from = 4
+            let to = 7
+            let [A1] = GetPosts.slice(-1);
+            let [A2] = GetPosts.slice(-2);
+            let [A3] = GetPosts.slice(-3);
+            let [A4] = GetPosts.slice(-4);
+            let Arr = [A1, A2, A3, A4]
+
+            for (let item of Arr) {
+
+                if (item.type === 'image') {
+                    let ul = document.getElementById('grid');
+                    let create_li = document.createElement("li");
+                    let img = document.createElement("img");
+                    ul.appendChild(create_li);
+                    create_li.appendChild(img);
+                    img.src = '.' + item.file
+                    create_li.appendChild(img);
+                }
+
+            }
+
+            document.getElementById('more').addEventListener('click', (e) => {
+                let GetArray = getFromTo(GetPosts, from, to)
+                if (to < GetPosts.length) {
+
+                    from += 4
+                    to += 4
+                    let und = 0
+                    for (let lop of GetArray) {
+
+                        if (lop.type === 'image') {
+
+                            let ul = document.getElementById('grid');
+                            let create_li = document.createElement("li");
+                            let img = document.createElement("img");
+                            ul.appendChild(create_li);
+                            create_li.appendChild(img);
+                            img.src = '.' + lop.file
+                            create_li.appendChild(img);
+                        }
+
+                        console.log(GetArray[und++] === undefined)
+                    }
+
+                } 
+
+                setTimeout(() => {
+                    if (to > GetPosts.length - 1) {
+                        document.getElementById('more').style = 'display: none;'
+                    }
+                }, 1000);
+            })
+
+            function getFromTo(arr,from,to) {
+
+                let result = [];
+                if (to > (arr.length - 1)) to = arr.length - 1;
+                for(var i = from; i <= to; i++) {
+                    result.push(arr[i])
+                }
+
+                return result;
+            }

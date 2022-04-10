@@ -1,0 +1,53 @@
+doctype html
+html(lang="ar")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title=`سورة ${Name}`
+        meta(name="keywords" content=`سورة ${Name}, عدد الآيات ${Number_Verses}, عدد الكلمات ${Number_Words}, ترتيب السورة ${Number}, عدد الحروف ${Number_Letters}, النزول ${Descent}, الإسم بالإنجليزي ${English_Name}`)
+        link(rel="stylesheet" href=" /Css/style.css" type="text/css")
+        link(rel="shortcut icon" href="../logo.png" type="image/x-icon")
+    body 
+        #header_top
+            a.header_url(href=localhost) الرئيسية
+            a.header_url(href=localhost+'/video') الفيديوهات
+            a.header_url(href=localhost+'/image') الصور
+            a.header_url(href=localhost+'/quran') القرآن الكريم
+            a.header_url(href=localhost+'/app') تطبيق التقوى
+        #header
+            a(href=localhost) 
+                img(src="../logo.png" id="logo")
+            a(href="https://t.me/tqw24h" target="_blank") 
+                img(src="../telegram.png" id="telegram")
+        #posts_home
+            a(href=localhost + '/quran') 
+                img(src="../return-button.png" id="return_icon")
+            h1#title=`سورة ${Name}` 
+            ul#quran 
+                li عدد الآيات: 
+                    span= Number_Verses
+                li عدد الكلمات: 
+                    span= Number_Words
+                li ترتيب السورة: 
+                    span= Number
+                li عدد الحروف: 
+                    span= Number_Letters
+                li النزول: 
+                    span= Descent
+                li الإسم بالإنجليزي: 
+                    span= English_Name
+            h1#bs بسم الله الرحمن الرحيم
+            P#Surah= Surah
+        #Statistics
+            #Statistics_top إحصائيات 
+            ul#Statistics_text
+                li عدد المشاركات: 
+                    span#Statistics_psts= Member.length
+                li عدد الأعضاء: 
+                    span#Statistics_psts= Users_length
+                li أحدث عضو: 
+                    span#Statistics_psts= lastUsers
+        p#bottom موقع التقوى | www.altaqwaa.org 
+        p#bottom_2 Desing web site by : 
+            a(href="https://github.com/rn0x" id="bottom_a" target="_blank") @rn0x  
