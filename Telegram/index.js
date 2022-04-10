@@ -59,7 +59,7 @@ module.exports = async function Telegram() {
 
         if (ctx.update.my_chat_member.new_chat_member.status === 'member' || ctx.update.my_chat_member.new_chat_member.status === 'administrator') {
 
-            if (GetUsers.some(e => e.dataValues.telegramid !== id) || GetUsers.length === 0) {
+            if (GetUsers.some(e => e.dataValues.telegramid.toString().includes(id)) === false || GetUsers.length === 0) {
 
                 await Users.create({
                     type: type,
@@ -75,7 +75,7 @@ module.exports = async function Telegram() {
 
         else if (ctx.update.my_chat_member.new_chat_member.status === 'left' || ctx.update.my_chat_member.new_chat_member.status === 'kicked') {
 
-            if (GetUsers.some(e => e.dataValues.telegramid === id)) {
+            if (GetUsers.some(e => e.dataValues.telegramid.toString().includes(id))) {
 
                 await Users.destroy({ where: { telegramid: id }, force: true });
                 console.log(`left ${id}`);
@@ -122,8 +122,8 @@ module.exports = async function Telegram() {
         let body = ctx.message.caption ? ctx.message.caption : null
         let title = number
         let fid = ctx.message.photo
-        let file_express = `./files/video/${number}.jpg`
-        let PathFile = `./public/files/video/${number}.jpg`
+        let file_express = `./files/image/${number}.jpg`
+        let PathFile = `./public/files/image/${number}.jpg`
         let type = 'image'
         let username = ctx.chat.username ? ctx.chat.username : null;
         let name = ctx.chat.first_name ? ctx.chat.first_name : ctx.chat.last_name ? ctx.chat.last_name : ctx.chat.title ? ctx.chat.title : null;
@@ -152,6 +152,7 @@ module.exports = async function Telegram() {
     bot.on("message", async (ctx) => {
 
         let text = ctx.message.text
+        let audio = ctx.message.audio
         let message_id = ctx.message.message_id
 
         if (text) {
