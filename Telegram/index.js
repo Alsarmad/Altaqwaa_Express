@@ -4,6 +4,7 @@ const { Sequelize, Model, DataTypes } = require('sequelize');
 const sqlite3 = require('sqlite3');
 const downloadFile = require('./downloadFile.js');
 const moment = require('moment');
+const { sitemap_json } = require('../sitemap.js');
 
 module.exports = async function Telegram() {
 
@@ -43,7 +44,6 @@ module.exports = async function Telegram() {
     });
 
     await sequelize.sync();
-    moment.locale('ar');
 
     bot.start((ctx) => ctx.reply('مرحبا بك من فضلك أرسل مقطع فيديو او صوره مع التعليق لرفعها على موقع التقوى'))
 
@@ -114,6 +114,7 @@ module.exports = async function Telegram() {
         })
 
         ctx.reply(`${localhost}/posts/${title}`, { reply_to_message_id: message_id });
+        await sitemap_json(`${localhost}/posts/${title}`, undefined, 'video');
     });
 
     bot.on('photo', async (ctx) => {
@@ -146,6 +147,7 @@ module.exports = async function Telegram() {
         })
 
         ctx.reply(`${localhost}/posts/${title}`, { reply_to_message_id: message_id });
+        await sitemap_json(`${localhost}/posts/${title}`, `${localhost}/files/image/${title}.jpg`, 'image');
 
     });
 

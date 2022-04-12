@@ -4,11 +4,11 @@ html(lang="ar")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        meta(name="description" content="الفيديوهات - موقع التقوى")
-        meta(name="keywords" content="فيديو, فيدوهات, فيديوهات إسلامية, فيديوهات قصير, فيديو قرآن قصير, فيديوهات قرآن قصيره, تصميم فيديو, التقوى, تصميم إسلامي, فيديوهات أذكار, حالات واتساب, حالات واتساب إسلامية")
-        title الفيديوهات
+        meta(name="description" content="التقوى هي سفينة النجاة يوم القيامة وهي التزام طاعة الله وطاعة رسوله, يهتم الموقع بنشر الثقافة الإسلامية.")
+        meta(name="keywords" content="Altaqwaa , taqwa, التقوى, موقع التقوى, تطبيق التقوى, تقوى الله, معنى التقوى, ماهي التقوى, altaqwaa.orq")
+        title موقع التقوى
         link(rel="stylesheet" href=" /Css/style.css" type="text/css")
-        link(rel="shortcut icon" href="../logo.png" type="image/x-icon")
+        link(rel="shortcut icon" href="./logo.png" type="image/x-icon")
     body 
         #header_top
             a.header_url(href=localhost) الرئيسية
@@ -42,33 +42,42 @@ html(lang="ar")
             let localhost = !{jsStringify(localhost)};
             let from = 4
             let to = 7
-            let arr_type = GetPosts.filter(e => e.type === 'video');
-            let [A1] = arr_type.slice(-1);
-            let [A2] = arr_type.slice(-2);
-            let [A3] = arr_type.slice(-3);
-            let [A4] = arr_type.slice(-4);
+            let [A1] = GetPosts.slice(-1);
+            let [A2] = GetPosts.slice(-2);
+            let [A3] = GetPosts.slice(-3);
+            let [A4] = GetPosts.slice(-4);
             let Arr = [A1, A2, A3, A4]
+
+            console.log(A2.type)
 
             for (let item of Arr) {
 
+                let ul = document.getElementById('grid');
+                let create_li = document.createElement("li");
+                let create_a = document.createElement("a");
+                let video = document.createElement("video");
+                let img = document.createElement("img");
+                ul.appendChild(create_li);
+                create_li.appendChild(create_a);
+
                 if (item.type === 'video') {
-                    let ul = document.getElementById('grid');
-                    let create_li = document.createElement("li");
-                    let create_a = document.createElement("a");
-                    let video = document.createElement("video");
-                    ul.appendChild(create_li);
-                    create_li.appendChild(create_a);
+                    create_a.href = localhost+'/posts/'+item.title
                     video.controls = true;
                     video.preload = 'metadata'
-                    video.src = '.' + item.file
-                    create_a.href = localhost+'/posts/'+item.title
+                    video.src = item.file
                     create_a.appendChild(video);
+                }
+
+                else if (item.type === 'image') {
+                    create_a.href = localhost+'/posts/'+item.title
+                    img.src = item.file
+                    create_a.appendChild(img);
                 }
 
             }
 
             document.getElementById('more').addEventListener('click', (e) => {
-                let GetArray = getFromTo(arr_type, from, to)
+                let GetArray = getFromTo(GetPosts, from, to)
                 if (to < GetPosts.length) {
 
                     from += 4
@@ -76,21 +85,29 @@ html(lang="ar")
                     let und = 0
                     for (let lop of GetArray) {
 
-                        if (lop.type === 'video') {
+                        let ul = document.getElementById('grid');
+                        let create_li = document.createElement("li");
+                        let create_a = document.createElement("a");
+                        let video = document.createElement("video");
+                        let img = document.createElement("img");
+                        ul.appendChild(create_li);
+                        create_li.appendChild(create_a);
 
-                            let ul = document.getElementById('grid');
-                            let create_li = document.createElement("li");
-                            let create_a = document.createElement("a");
-                            let video = document.createElement("video");
-                            ul.appendChild(create_li);
-                            create_li.appendChild(create_a);
+                        if (lop.type === 'video') {
+                            create_a.href = localhost+'/posts/'+lop.title
                             video.controls = true;
                             video.preload = 'metadata'
-                            video.src = '.' + lop.file
-                            create_a.href = localhost+'/posts/'+lop.title
+                            video.src = lop.file
                             create_a.appendChild(video);
                         }
 
+                        else if (lop.type === 'image') {
+                            create_a.href = localhost+'/posts/'+lop.title
+                            img.src = lop.file
+                            create_a.appendChild(img);
+                        }
+
+                        console.log(GetArray[und++] === undefined)
                     }
 
                 } 

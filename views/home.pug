@@ -39,6 +39,7 @@ html(lang="ar")
 
         script(type="text/javascript").
             let GetPosts = !{jsStringify(GetPosts)};
+            let localhost = !{jsStringify(localhost)};
             let from = 4
             let to = 7
             let [A1] = GetPosts.slice(-1);
@@ -53,22 +54,24 @@ html(lang="ar")
 
                 let ul = document.getElementById('grid');
                 let create_li = document.createElement("li");
+                let create_a = document.createElement("a");
                 let video = document.createElement("video");
                 let img = document.createElement("img");
                 ul.appendChild(create_li);
-
+                create_li.appendChild(create_a);
+                
                 if (item.type === 'video') {
-                    create_li.appendChild(video);
+                    create_a.href = localhost+'/posts/'+item.title
                     video.controls = true;
                     video.preload = 'metadata'
                     video.src = item.file
-                    create_li.appendChild(video);
+                    create_a.appendChild(video);
                 }
 
                 else if (item.type === 'image') {
-                    create_li.appendChild(img);
+                    create_a.href = localhost+'/posts/'+item.title
                     img.src = item.file
-                    create_li.appendChild(img);
+                    create_a.appendChild(img);
                 }
 
             }
@@ -84,21 +87,24 @@ html(lang="ar")
 
                         let ul = document.getElementById('grid');
                         let create_li = document.createElement("li");
+                        let create_a = document.createElement("a");
                         let video = document.createElement("video");
                         let img = document.createElement("img");
                         ul.appendChild(create_li);
+                        create_li.appendChild(create_a);
+
                         if (lop.type === 'video') {
-                            create_li.appendChild(video);
+                            create_a.href = localhost+'/posts/'+lop.title
                             video.controls = true;
                             video.preload = 'metadata'
                             video.src = lop.file
-                            create_li.appendChild(video);
+                            create_a.appendChild(video);
                         }
 
                         else if (lop.type === 'image') {
-                            create_li.appendChild(img);
+                            create_a.href = localhost+'/posts/'+lop.title
                             img.src = lop.file
-                            create_li.appendChild(img);
+                            create_a.appendChild(img);
                         }
 
                         console.log(GetArray[und++] === undefined)

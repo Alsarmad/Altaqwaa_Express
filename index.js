@@ -70,6 +70,23 @@ async function Express() {
             response.send(render)
         });
 
+        app.get('/posts', async (request, response) => {
+
+            let GetPosts = await Posts.findAll();
+            let GetUsers = await Users.findAll();
+            let [lastUsers] = GetUsers.slice(-1)
+            let Options = {
+
+                GetPosts: GetPosts,
+                Users_length: GetUsers.length,
+                jsStringify: jsStringify,
+                localhost: localhost,
+                lastUsers: lastUsers.username ? lastUsers.username : lastUsers.name
+            }
+            let render = pug.renderFile('./views/posts2.pug', Options);
+            response.send(render)
+        });
+
         app.get('/app', async (request, response) => {
             let render = pug.renderFile('./views/app.pug', { localhost: localhost });
             response.send(render)

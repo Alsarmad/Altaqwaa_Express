@@ -39,6 +39,7 @@ html(lang="ar")
 
         script(type="text/javascript").
             let GetPosts = !{jsStringify(GetPosts)};
+            let localhost = !{jsStringify(localhost)};
             let from = 4
             let to = 7
             let arr_type = GetPosts.filter(e => e.type === 'image');
@@ -53,11 +54,13 @@ html(lang="ar")
                 if (item.type === 'image') {
                     let ul = document.getElementById('grid');
                     let create_li = document.createElement("li");
+                    let create_a = document.createElement("a");
                     let img = document.createElement("img");
                     ul.appendChild(create_li);
-                    create_li.appendChild(img);
+                    create_li.appendChild(create_a);
                     img.src = '.' + item.file
-                    create_li.appendChild(img);
+                    create_a.href = localhost+'/posts/'+item.title
+                    create_a.appendChild(img);
                 }
 
             }
@@ -75,11 +78,13 @@ html(lang="ar")
 
                             let ul = document.getElementById('grid');
                             let create_li = document.createElement("li");
+                            let create_a = document.createElement("a");
                             let img = document.createElement("img");
                             ul.appendChild(create_li);
-                            create_li.appendChild(img);
+                            create_li.appendChild(create_a);
                             img.src = '.' + lop.file
-                            create_li.appendChild(img);
+                            create_a.href = localhost+'/posts/'+lop.title
+                            create_a.appendChild(img);
                         }
 
                         console.log(GetArray[und++] === undefined)
