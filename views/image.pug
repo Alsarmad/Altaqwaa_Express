@@ -66,7 +66,7 @@ html(lang="ar")
             }
 
             document.getElementById('more').addEventListener('click', (e) => {
-                let GetArray = getFromTo(arr_type, from, to)
+                let GetArray = getFromTo(arr_type.slice().reverse(), from, to)
                 if (to < GetPosts.length) {
 
                     from += 4
@@ -93,7 +93,7 @@ html(lang="ar")
                 } 
 
                 setTimeout(() => {
-                    if (to > GetPosts.length - 1) {
+                    if (to > arr_type.length - 1) {
                         document.getElementById('more').style = 'display: none;'
                     }
                 }, 1000);

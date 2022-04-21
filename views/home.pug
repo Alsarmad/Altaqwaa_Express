@@ -77,12 +77,14 @@ html(lang="ar")
             }
 
             document.getElementById('more').addEventListener('click', (e) => {
-                let GetArray = getFromTo(GetPosts, from, to)
+                let GetArray = getFromTo(GetPosts.slice().reverse(), from, to)
+
                 if (to < GetPosts.length) {
 
                     from += 4
                     to += 4
                     let und = 0
+                    
                     for (let lop of GetArray) {
 
                         let ul = document.getElementById('grid');
