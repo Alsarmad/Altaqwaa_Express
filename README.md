@@ -21,11 +21,13 @@
 <br><br>
 
 ##### متطلبات تشغيل الموقع
-- nodejs ```bash sudo apt install nodejs ```
-- git ```bash sudo apt install git ```
-- pm2 ```bash sudo npm install -g pm2 ```
+- nodejs ``` sudo apt install nodejs ```
+- git ``` sudo apt install git ```
+- pm2 ``` sudo npm install -g pm2 ```
 - [شهادة ssl ](https://greenlock.domains)
 - تحرير ملف Settings.json وإضافة توكن بوت التيليجرام + رابط الموقع
+
+<br><br>
 
 ```json
 
@@ -36,6 +38,8 @@
 
 ```
 
+<br><br>
+
 ```bash
 
 git clone https://github.com/rn0x/Altaqwaa_Express
@@ -45,8 +49,11 @@ sudo pm2 start index.js --name Altaqwaa
 sudo pm2 save
 
 ```
+<br><br>
 
 لإعادة تشغيل الموقع والبوت 
+
+<br><br>
 
 ```bash
 
@@ -54,9 +61,11 @@ sudo pm2 restart Altaqwaa
 
 ```
 
+<br><br><br><br>
+
 
 <p align="center">
-  <img align="center" src="/Github/1.png"> <br><br>
-  <img align="center" src="/Github/2.png"> <br><br>
-  <img align="center" src="/Github/3.png"> <br><br><br><br>
+  <img align="center" src="/github/1.png"> <br><br>
+  <img align="center" src="/github/2.png"> <br><br>
+  <img align="center" src="/github/3.jpg"> <br><br><br><br>
 </p>
