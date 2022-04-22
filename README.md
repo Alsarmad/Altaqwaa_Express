@@ -25,7 +25,9 @@
 - git ``` sudo apt install git ```
 - pm2 ``` sudo npm install -g pm2 ```
 - [شهادة ssl ](https://greenlock.domains)
-- تحرير ملف Settings.json وإضافة توكن بوت التيليجرام + رابط الموقع
+- [ توكن بوت تيليجرام ](https://t.me/BotFather)
+- تحرير ملف Settings.json 
+
 
 <br><br>
 
@@ -38,6 +40,9 @@
 
 ```
 
+Token | توكن بوت التيلجرام
+localhost | رابط الموقع 
+
 <br><br>
 
 ```bash
@@ -45,6 +50,7 @@
 git clone https://github.com/rn0x/Altaqwaa_Express
 cd Altaqwaa_Express
 npm i
+sudo pm2 startup
 sudo pm2 start index.js --name Altaqwaa
 sudo pm2 save
 
