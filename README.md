@@ -25,7 +25,7 @@
 - git ``` sudo apt install git ```
 - pm2 ``` sudo npm install -g pm2 ```
 - [شهادة ssl ](https://greenlock.domains)
-- [ توكن بوت تيليجرام ](https://t.me/BotFather)
+- [ إنشاء بوت تيليجرام ](https://t.me/BotFather)
 - تحرير ملف Settings.json 
 
 
@@ -40,8 +40,8 @@
 
 ```
 
-Token | توكن بوت التيلجرام
-localhost | رابط الموقع 
+Token | توكن بوت التيلجرام <br>
+localhost | رابط الموقع <br>
 
 <br><br>
 
