@@ -1,6 +1,6 @@
 {
   "name": "altaqwaa_express",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "موقع التقوى | رفع الفيديوهات وصور على الموقع عبر بوت تيليجرام",
   "main": "index.js",
   "type": "commonjs",
