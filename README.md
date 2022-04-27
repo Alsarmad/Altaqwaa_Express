@@ -35,7 +35,8 @@
 
 {
     "Token":"5235135307:AAHo0oLEmzsCDtLdTheDvq--QovO-i_dk7s",
-    "localhost":"http://localhost"
+    "localhost":"http://localhost",
+    "admin": 1061237219
 }
 
 ```

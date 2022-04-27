@@ -138,7 +138,7 @@ async function Express() {
             if (findPosts === undefined) {
 
                 let render = pug.renderFile('./views/404.pug', { localhost: localhost });
-                response.status(500).send(render);
+                response.status(404).send(render);
 
             } else {
 
@@ -176,7 +176,7 @@ async function Express() {
             if (findPosts === undefined) {
 
                 let render = pug.renderFile('./views/404.pug', { localhost: localhost });
-                response.status(500).send(render);
+                response.status(404).send(render);
 
             } else {
 
@@ -204,7 +204,7 @@ async function Express() {
 
         app.get('*', (request, response) => {
             let render = pug.renderFile('./views/404.pug', { localhost: localhost });
-            response.status(500).send(render);
+            response.status(404).send(render);
         });
 
 

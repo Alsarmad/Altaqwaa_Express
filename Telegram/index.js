@@ -155,7 +155,7 @@ module.exports = async function Telegram() {
 
         let members = ctx.update.message.new_chat_members[0];
         let id = members.id;
-        let username = members.username? members.username : null;
+        let username = members.username ? members.username : null;
         let first_name = members.first_name ? members.first_name : members.last_name ? members.last_name : null;
         let type = ctx.chat.type
         let GetUsers = await Users.findAll();
@@ -168,7 +168,7 @@ module.exports = async function Telegram() {
                 name: first_name,
                 telegramid: id
             })
-            
+
             console.log(`join  ${id}`);
 
         }
@@ -190,13 +190,41 @@ module.exports = async function Telegram() {
 
     });
 
+    bot.command('del', async (ctx) => {
+
+
+        if (Settings.admin === ctx.message.from.id) {
+
+            if (ctx.message.text && !ctx.message.reply_to_message) {
+
+                await ctx.reply("من فضلك قم بالرد على الرساله المراد حذفها ب /del")
+            }
+
+            else if (ctx.message.text && ctx.message.reply_to_message) {
+
+                let id_media = ctx.message.reply_to_message.text.split(`${localhost}/posts/`)[1]
+                let message_id = ctx.message.reply_to_message.message_id
+                await Posts.destroy({ where: { title: id_media }, force: true });
+                await ctx.deleteMessage(message_id);
+            }
+
+
+        }
+
+        else {
+
+            await ctx.reply("لايمكن حذف الرسائل إلا من قبل الإدارة");
+        }
+
+    });
+
     bot.on("message", async (ctx) => {
 
         let text = ctx.message.text
         let audio = ctx.message.audio
         let message_id = ctx.message.message_id
 
-        if (text) {
+        if (text && Settings.admin !== ctx.message.from.id) {
 
             await ctx.deleteMessage(message_id)
         }
